@@ -23,13 +23,6 @@ const updateUsuarioSchemas = Joi.object({
 
 const getUsuarioSchemas = Joi.object({
     id: id.required()
-    // .custom((value, helper) => { 
-    //     const userForm = userService.user.find((item) => item.id == value)
-    //     if(!userForm){
-    //         return helper.message('el usuario no existe')
-    //     }
-    //     return true
-    // })
 })
 
 export {createUsuarioSchemas, updateUsuarioSchemas, getUsuarioSchemas}

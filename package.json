@@ -22,7 +22,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "nodemon": "^3.1.7",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "sequelize-cli": "^6.6.2"
   },
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
@@ -30,7 +31,8 @@
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "joi": "^17.13.3",
-    "mysql2": "^3.11.4"
+    "mysql2": "^3.11.4",
+    "sequelize": "^6.37.5"
   },
   "type": "module"
 }
