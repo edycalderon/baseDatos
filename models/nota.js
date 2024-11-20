@@ -1,25 +1,29 @@
 'use strict';
 import { Model } from 'sequelize';
 export default (sequelize, DataTypes) => {
-  class User extends Model {
+  class Nota extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      this.hasMany(models.Notas)
+      this.belongsTo(models.User)
     }
+
+    // formToJSON(){
+    //   const attributes = {...this.get()}
+    //   delete attributes.UserID
+    //   return attributes
+    // }
   }
-  User.init({
-    nombre: DataTypes.STRING,
-    apellido: DataTypes.STRING,
-    contrasenia: DataTypes.STRING,
-    estatus: DataTypes.BOOLEAN
+
+
+  Nota.init({
+    nota: DataTypes.NUMBER
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Notas',
   });
-  return User;
+  return Nota;
 };

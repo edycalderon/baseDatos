@@ -19,7 +19,6 @@ const updateClienteSchemas = Joi.object({
     nombre: nombre.required(),
     apellido: apellido.required(),
     address: address.required(),
-    type: type.required()
 })
 
 const getClienteSchemas = Joi.object({

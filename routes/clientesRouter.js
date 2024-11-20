@@ -22,7 +22,7 @@ router.delete('/:id', ValidatorHandler(getClienteSchemas, 'params'), async(req, 
         if(deletecliente){
             res
             .status(200)
-            .json({message: "Se a eliminado con exito" , data:deleteUser})
+            .json({message: "Se a eliminado con exito" , data:deletecliente})
         }
     } catch (e) {
         next(e)

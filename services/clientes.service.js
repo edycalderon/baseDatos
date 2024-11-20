@@ -36,7 +36,7 @@ class ClientesService {
             const cliente = await Cliente.findByPk(id)
             cliente.nombre = nombre,
             cliente.apellido = apellido,
-            cliente.address = address
+            cliente.address = address,
             cliente.save()
             return cliente
         } catch (error) {
