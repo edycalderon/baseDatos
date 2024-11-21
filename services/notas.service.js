@@ -7,8 +7,8 @@ export class NotaService{
             attributes: {exclude: ['UserId']},
             include: {
                 model: User, attributes: {
-                    exclude:['contrasenia', 'estatus', 'createdAt', 'updatedAt']
-                }}
+                exclude:['contrasenia', 'estatus', 'createdAt', 'updatedAt']
+            }}
         });
     }
 
@@ -34,6 +34,31 @@ export class NotaService{
             UserId: user.id
         })
         
+        return nota
+    }
+
+    async update(idNota, data){
+        const user = await User.findByPk(data.user_ID)
+        if(!user){
+            throw new notFound('usuario no existe')
+        }
+        const nota = await Notas.findByPk(idNota)
+        if(!nota){
+            throw new notFound('Nota not found')
+        }
+        
+        nota.nota = data.nota
+        nota.UserId = user.id
+        await nota.save()
+        return nota
+    }
+
+    async delete(id) {
+        const nota = await  Notas.findByPk(id)
+        if(!nota){
+            throw notFound('Nota no encotrada')
+        }
+        await nota.destroy()
         return nota
     }
 }

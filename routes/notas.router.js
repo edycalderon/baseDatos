@@ -1,5 +1,7 @@
 import  express  from "express";
 import { NotaService } from "../services/notas.service.js";
+import { createNotaSchemas, updateNotaSchemas, getNotaSchemas } from "../schemas/notas.schema.js";
+import ValidatorHandler from "../middleware/validador.handler.js";
 const router = express.Router();
 
 const notaService = new NotaService()
@@ -13,7 +15,7 @@ router.get('/', async(req, res, next ) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', ValidatorHandler(getNotaSchemas, 'params'),async (req, res, next) => {
     try {
         const {id} = req.params
         const nota = await notaService.findone(parseInt(id))
@@ -23,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-router.post('/', async(req, res, next) => {
+router.post('/', ValidatorHandler(createNotaSchemas), async(req, res, next) => {
     try {
         let newNota = await notaService.store(req.body)
         res.status(200).json(newNota);
@@ -32,37 +34,39 @@ router.post('/', async(req, res, next) => {
     }
 })
 
-
-// router.delete('/:id', ValidatorHandler(getUsuarioSchemas, 'params'), async(req, res, next) => {
-//     try {
-//         const {id} = req.params
-//         let deleteUser = await service.delete(id)
-//         if(deleteUser){
-//             res
-//             .status(200)
-//             .json({message: "Se a eliminado con exito" , data:deleteUser})
-//         }
-//     } catch (e) {
-//         next(e)
-//     }
-// })
+router.put('/:id',ValidatorHandler(getNotaSchemas, 'params'),
+ValidatorHandler(updateNotaSchemas, 'body'), 
+async(req, res, next) => {
+    try {
+        const {id} = req.params
+        let notaUpdate = await notaService.update(parseInt(id), req.body)
+        res.status(200).json(notaUpdate)
+    } catch (e) {
+        next(e)
+    }
+})
 
 
 
+router.delete('/:id', ValidatorHandler(getNotaSchemas, 'params'), async(req, res, next) => {
+    try {
+        const {id} = req.params
+        let deleteNota = await notaService.delete(parseInt(id))
+        if(deleteNota){
+            res
+            .status(200)
+            .json({message: "Se a eliminado con exito" , data:deleteNota})
+        }
+    } catch (e) {
+        next(e)
+    }
+})
 
 
 
-// router.put('/:id', 
-// ValidatorHandler(getUsuarioSchemas, 'params'),
-// ValidatorHandler(updateUsuarioSchemas, 'body') ,async(req, res, next) => {
-//     try {
-//         const {id} = req.params
-//         let userUpdate = await service.update(id, req.body)
-//         res.status(200).json(userUpdate)
-//     } catch (e) {
-//         next(e)
-//     }
-// })
+
+
+
 
 
 
