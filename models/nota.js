@@ -10,12 +10,6 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.User)
     }
-
-    // formToJSON(){
-    //   const attributes = {...this.get()}
-    //   delete attributes.UserID
-    //   return attributes
-    // }
   }
 
 
